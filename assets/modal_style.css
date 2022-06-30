@@ -1,0 +1,67 @@
+.modal-container {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 2000;
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-container.show {
+  display: flex;
+}
+
+.modal {
+  background-color: white;
+  width: 60%;
+  min-width: 300px;
+  padding: 20px;
+  border: 10px solid rgb(62, 128, 214);
+  box-shadow: 3px 3px 5px 5px rgb(104, 98, 98);
+  position: relative;
+  text-align: center;
+}
+
+@keyframes modal {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -60px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.show .modal {
+  animation: modal 0.3s;
+}
+
+.close {
+  position: absolute;
+  top: -30px;
+  right: -30px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 4px solid white;
+  background-color: rgb(47, 131, 241);
+  color: white;
+  font-family: "Fredoka One", Arial, Helvetica, sans-serif;
+  cursor: pointer;
+  font-size: 20px;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.3);
+}
+
+.close:hover {
+  background-color: rgb(21, 83, 165);
+}
+
+.modal ul {
+  padding: 0;
+  list-style-type: none;
+}
