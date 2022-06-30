@@ -1,56 +1,59 @@
-h1{
-    text-align: center;
+h1 {
+  text-align: center;
 }
 
-h2{
-    margin: 0;
-    padding: 0;
+h2 {
+  margin: 0;
+  padding: 0;
 }
 
-.div{
-    margin: 0 auto;
-    width: 500px;
-    justify-content: center;
-    align-items: center;
+.div {
+  margin: 0 auto;
+  width: 80%px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
-div > img{
-    margin: 0 auto;
-    display: block;
+div > img {
+  margin: 0 auto;
+  display: block;
+}
+/*
+.letra {
+  display: flex;
+  margin: 2rem auto;
+  justify-content: center;
+}*/
+
+.letra {
+  width: 30px;
+  height: 30px;
+  font-size: 25px;
+  margin: 0 1rem;
 }
 
-.letra{
-    display: flex;
-    margin: 2rem auto;
-    justify-content: center;
+.letras {
+  display: flex;
 }
 
-#letra{
-    width: 30px;
-    height: 30px;
-    font-size: 25px;
-    margin: 0 1rem;
+#letras {
+  width: 30px;
+  height: 30px;
+  font-size: 25px;
 }
 
-#letras{
-    width: 30px;
-    height: 30px;
-    font-size: 25px;
+.btn {
+  width: 100px;
+  height: 37px;
+  font-size: medium;
+  background-color: rgb(62, 128, 214);
+  color: white;
+  border: none;
+  border-radius: 1.5rem;
 }
 
-button{
-    width: 100px;
-    height: 37px;
-    font-size: medium;
-    background-color: rgb(7, 7, 7);
-    color: white;
-    border: none;
-    border-radius: 1.5rem;   
-}
-
-button:hover{
-    background: transparent;
-    color: rgb(7, 7, 7);
-    border: 2px solid rgb(7, 7, 7);
-    cursor: pointer;
+.btn:hover {
+  background-color: rgb(21, 83, 165);
+  cursor: pointer;
 }
