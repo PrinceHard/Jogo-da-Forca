@@ -19,12 +19,6 @@ div > img {
   margin: 0 auto;
   display: block;
 }
-/*
-.letra {
-  display: flex;
-  margin: 2rem auto;
-  justify-content: center;
-}*/
 
 .letra {
   width: 30px;
@@ -56,4 +50,13 @@ div > img {
 .btn:hover {
   background-color: rgb(21, 83, 165);
   cursor: pointer;
+}
+
+.cronometro {
+  text-align: center;
+  font-size: 1.5em;
+}
+
+table {
+  margin: 2% auto 0 auto;
 }

@@ -8,10 +8,7 @@
     <link rel="stylesheet" href="assets/modal_style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Titan+One&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Titan+One&display=swap" rel="stylesheet" />
     <title>Jogo da Forca</title>
   </head>
 
@@ -21,36 +18,25 @@
     </header>
     <div id="menu" class="div">
       <button id="btnStartGame" class="btn">Iniciar</button>
-      <button id="btnTemas" class="btn">Temas</button>
+      <button id="btnHistorico" class="btn">Histórico</button>
+      <button id="btnPercentuais" class="btn">Percentual</button>
     </div>
 
     <div hidden id="game">
+      <div class="cronometro"><span id="minuto">00</span>:<span id="segundo">00</span></div>
       <div class="div">
-        <img
-          src="assets/img/forca-status-inicial.png"
-          alt="forca-status-inicial"
-          id="img"
-        />
+        <img id="imgForca" />
       </div>
       <div class="div">
         <h2 id="palavraTema"></h2>
         <div id="palavraSoletrada" class=""></div>
         <div>
-          <p>Tentativas:</p>
+          <p>Tentativas: <span id="spanLetrasErradas"></span></p>
         </div>
       </div>
       <div class="div">
         <p>Escolha uma letra:</p>
         <div class="letrasOption"></div>
-      </div>
-    </div>
-
-    <!--modais-->
-    <div id="modalTemas" class="modal-container">
-      <div class="modal">
-        <button class="close">x</button>
-        <h2>Temas disponíveis</h2>
-        <ul id="temasList"></ul>
       </div>
     </div>
 
@@ -62,6 +48,39 @@
       </div>
     </div>
 
-    <script type="text/javascript" src="assets/script.js"></script>
+    <div id="modalHistorico" class="modal-container">
+      <div class="modal">
+        <button class="close">x</button>
+        <h2>Histórico de jogos</h2>
+        <table>
+          <thead>
+            <th>Número</th>
+            <th>Palavra</th>
+            <th>Resultado</th>
+            <th>Sugestões</th>
+            <th>Tempo de conclusão</th>
+          </thead>
+          <tbody id="historicoBodyTable"></tbody>
+          <tfoot>
+            <th>Número</th>
+            <th>Palavra</th>
+            <th>Resultado</th>
+            <th>Sugestões</th>
+            <th>Tempo de conclusão</th>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+
+    <div id="modalPercentual" class="modal-container">
+      <div class="modal">
+        <button class="close">x</button>
+        <h2>Percentual de acertos</h2>
+        <p id="percentualAcertoGeral"></p>
+        <button id="btnPercentualEspecifico" class="btn-large">Calcular Percentual Específico</button>
+      </div>
+    </div>
+
+    <script type="module" src="assets/scripts/script.js"></script>
   </body>
 </html>
