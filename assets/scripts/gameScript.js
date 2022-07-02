@@ -233,3 +233,17 @@ const fimDeJogo = (resultado) => {
     // Reinicia o cronômetro
     resetCronometro();
 };
+
+// Evento pra abrir modal perguntar ao usuário se ele realmente que desistir ao clicar no botão 'btnDesistir'.
+// Se sim, finaliza o jogo.
+const btnDesistir = document.querySelector("#btnDesistir");
+btnDesistir.addEventListener("click", () => {
+    pauseCronometro();
+    const desistiu = confirm("Tem certeza que desejar desistir?");
+    if (desistiu) {
+        resetCronometro();
+        navegarPara("menu");
+    } else {
+        startCronometro();
+    }
+});
