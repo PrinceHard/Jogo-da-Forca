@@ -1,4 +1,5 @@
-// Array com todos os temas e palavras
+// Script feito apenas para armazenar dados necessários para o funcionamento do jogo.
+
 export const temas = [
     {
         display: "Países",
