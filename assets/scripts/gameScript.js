@@ -1,6 +1,5 @@
 import { letras } from "./data.js";
 import { navegarPara, showModal } from "./script.js";
-import { resetCronometro, pauseCronometro, startCronometro, returnTempoCronometro } from "./utils.js";
 
 // Variável para armazenar o histórico de jogos numa sessão.
 export const historico = [];
@@ -247,3 +246,63 @@ btnDesistir.addEventListener("click", () => {
         startCronometro();
     }
 });
+
+/*Cronômetro*/
+let minuto = 0;
+let segundo = 0;
+
+// Pega a 'span' que armazenará os minutos.
+const minutoSpan = document.getElementById("minuto");
+
+// Pega a 'span' que armazenará os segundos.
+const segundoSpan = document.getElementById("segundo");
+
+let cron;
+
+// Limpa o intervalo e cria um novo que executará a função 'timer' a cada 1 segundo.
+export const startCronometro = () => {
+    pauseCronometro();
+    cron = setInterval(() => {
+        timer();
+    }, 1000);
+};
+
+// Limpa o intervalo, evitando que a função 'timer' seja acionada.
+export const pauseCronometro = () => {
+    clearInterval(cron);
+};
+
+// Reseta os valores para 0.
+export const resetCronometro = () => {
+    minuto = 0;
+    segundo = 0;
+    minutoSpan.innerText = "00";
+    segundoSpan.innerText = "00";
+};
+
+// Gera uma string com o tempo do cronômetro formatado.
+export const returnTempoCronometro = () => {
+    return formatData(minuto) + ":" + formatData(segundo);
+};
+
+const timer = () => {
+    // A cada verificação, é acrescentado 1 à variável segundo.
+    // Quando a variável chegar em 60, é acrescentado 1 à variável minuto.
+    if ((segundo += 1) == 60) {
+        segundo = 0;
+        minuto++;
+    }
+    // Ao chegar em 60 minutos, o cronômetro para.
+    if (minuto == 60) {
+        minuto = 59;
+        segundo = 59;
+        pauseCronometro();
+    }
+    minutoSpan.innerText = formatData(minuto);
+    segundoSpan.innerText = formatData(segundo);
+};
+
+// Formata o valor que será exibido ao jogador durante o jogo.
+const formatData = (input) => {
+    return input > 9 ? input : `0${input}`;
+};
