@@ -1,8 +1,29 @@
 import { letras } from "./data.js";
-import { navegarPara, showModal } from "./script.js";
+import { navegarPara, showModal } from "./index.js";
 
 // Variável para armazenar o histórico de jogos numa sessão.
-export const historico = [];
+export let historico = [];
+
+const getGames = () => {
+    const Http = new XMLHttpRequest();
+    const url = "http://localhost:3000/games";
+    Http.open("GET", url);
+    Http.send();
+
+    Http.onreadystatechange = () => {
+        if (Http.readyState === 4 && Http.status === 200) {
+            historico = [];
+            JSON.parse(Http.responseText).forEach((game) => {
+                historico.push(game);
+            });
+            console.log(historico);
+        } else {
+            console.error(Http.statusText);
+        }
+    };
+};
+getGames();
+
 // Variável para armazenar a quatidade de jogos numa sessão.
 let qtdJogos = 0;
 
@@ -83,7 +104,7 @@ export const startGame = (tema) => {
     game.totalLetras = qtdLetras;
     game.letrasErradas = 0;
     game.letrasAcertadas = 0;
-    srcForca = "assets/img/" + qtdLetras + "-erros/";
+    srcForca = "../img/" + qtdLetras + "-erros/";
     imgForca.src = srcForca + "inicial.png";
 };
 
@@ -200,37 +221,50 @@ const fimDeJogo = (resultado) => {
         tempoConclusao: returnTempoCronometro(),
     };
     // Coloca o objeto na array 'historico'
-    historico.push(jogo);
+    const Http = new XMLHttpRequest();
+    const url = "http://localhost:3000/add_game";
+    console.log(jogo);
+    Http.open("POST", url);
+    Http.setRequestHeader("Content-Type", "application/json");
+    Http.send(JSON.stringify(jogo));
 
-    // Pega o 'h2' que corresponde ao título do modal que exibe o resultado.
-    const modalTitle = document.querySelector("#resultadoTitulo");
+    Http.onreadystatechange = () => {
+        if (Http.readyState === 4 && Http.status === 200) {
+            // Pega o 'h2' que corresponde ao título do modal que exibe o resultado.
+            const modalTitle = document.querySelector("#resultadoTitulo");
 
-    // Pega o 'p' que corresponde à descrição do modal que exibe o resultado.
-    const modalDescricao = document.querySelector("#resultadoDescricao");
+            // Pega o 'p' que corresponde à descrição do modal que exibe o resultado.
+            const modalDescricao = document.querySelector("#resultadoDescricao");
 
-    // Formata o texto de acordo com o resultado.
-    if (resultado === "V") {
-        modalTitle.innerText = "Vitória";
-        modalDescricao.innerHTML = "Parabéns! Você acertou a palavra " + jogo.palavra + ".<br>";
-    } else {
-        modalTitle.innerText = "Derrota";
-        modalDescricao.innerHTML = "Ops! Você errou a palavra " + jogo.palavra + ".<br>";
-    }
+            // Formata o texto de acordo com o resultado.
+            if (resultado === "V") {
+                modalTitle.innerText = "Vitória";
+                modalDescricao.innerHTML = "Parabéns! Você acertou a palavra " + jogo.palavra + ".<br>";
+            } else {
+                modalTitle.innerText = "Derrota";
+                modalDescricao.innerHTML = "Ops! Você errou a palavra " + jogo.palavra + ".<br>";
+            }
 
-    // Adiciona o número de sugestões ao texto de exibição do resultado.
-    modalDescricao.innerHTML += "Você fez " + jogo.sugestoes + " sugestões" + "<br>";
+            // Adiciona o número de sugestões ao texto de exibição do resultado.
+            modalDescricao.innerHTML += "Você fez " + jogo.sugestoes + " sugestões" + "<br>";
 
-    // Adiciona o tempo de conclusão ao texto de exibição do resultado.
-    modalDescricao.innerHTML += "\nVocê levou " + jogo.tempoConclusao + " para finalizar o jogo.";
+            // Adiciona o tempo de conclusão ao texto de exibição do resultado.
+            modalDescricao.innerHTML += "\nVocê levou " + jogo.tempoConclusao + " para finalizar o jogo.";
 
-    // Abre o modal para exibir o resultado.
-    showModal("modalResultado");
+            // Abre o modal para exibir o resultado.
+            showModal("modalResultado");
 
-    // Fecha o jogo e volta para o menu,
-    navegarPara("menu");
+            // Fecha o jogo e volta para o menu,
+            navegarPara("menu");
 
-    // Reinicia o cronômetro
-    resetCronometro();
+            getGames();
+
+            // Reinicia o cronômetro
+            resetCronometro();
+        } else {
+            console.error(Http.statusText);
+        }
+    };
 };
 
 // Evento pra abrir modal perguntar ao usuário se ele realmente que desistir ao clicar no botão 'btnDesistir'.
