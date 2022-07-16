@@ -8,9 +8,9 @@ mongoose.connect("mongodb://localhost:27017/forca", {
     useUnifiedTopology: true,
 });
 const db = mongoose.connection;
-db.on("error", console.error.bind(console, "connection erro: "));
+db.on("error", console.error.bind(console, "Erro ao conectar: "));
 db.once("open", () => {
-    console.log("Connected successfully");
+    console.log("Conectado ao MongoDB com sucesso!");
 });
 
 // criação de aplicação express

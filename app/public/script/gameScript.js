@@ -4,6 +4,9 @@ import { navegarPara, showModal } from "./index.js";
 // Variável para armazenar o histórico de jogos numa sessão.
 export let historico = [];
 
+// Variável para armazenar a quatidade de jogos numa sessão.
+let qtdJogos = 0;
+
 const getGames = () => {
     const Http = new XMLHttpRequest();
     const url = "http://localhost:3000/games";
@@ -16,16 +19,13 @@ const getGames = () => {
             JSON.parse(Http.responseText).forEach((game) => {
                 historico.push(game);
             });
-            console.log(historico);
+            qtdJogos = historico.length;
         } else {
             console.error(Http.statusText);
         }
     };
 };
 getGames();
-
-// Variável para armazenar a quatidade de jogos numa sessão.
-let qtdJogos = 0;
 
 // Variável para armazenar a palavra em formato de array, facilitando a manipulação.
 let palavraArray = [];
@@ -223,7 +223,6 @@ const fimDeJogo = (resultado) => {
     // Coloca o objeto na array 'historico'
     const Http = new XMLHttpRequest();
     const url = "http://localhost:3000/add_game";
-    console.log(jogo);
     Http.open("POST", url);
     Http.setRequestHeader("Content-Type", "application/json");
     Http.send(JSON.stringify(jogo));
